@@ -1,0 +1,7 @@
+util.require_natives("9999z", "G")
+
+local ped = CREATE_PED(4, 0, 1.0, 2.0, 3.0, 0.0, false, true)
+if DOES_ENTITY_EXIST(ped) then
+    SET_ENTITY_COORDS(ped, 1.0, 2.0, 3.0, false, false, false, true)
+end
+G_ONLY_NATIVE()

@@ -1,0 +1,12 @@
+{
+  "while/do/util.yield/end": {
+      "prefix": ["while_yield"],
+      "body": "while ${1:condition} do\n\t${2:-- body}\n\tutil.yield(${0:wake_in_ms})\nend",
+  },
+  "repeat/util.yield/until": {
+      "prefix": ["repeat", "until"],
+      "body": "repeat\n\t${1:-- body}\n\tutil.yield(${0:wake_in_ms})\nuntil ${2:condition}"
+  }
+}
+
+

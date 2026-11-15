@@ -1,0 +1,86 @@
+{
+  "name": "lua-stand-api",
+  "displayName": "Lua - Stand API",
+  "description": "Support for Stand API and GTA V natives (util.require_natives)",
+  "version": "0.0.7",
+  "engines": {
+    "vscode": "^1.140.0"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "publisher": "Lirniri",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lirniri/lua-stand-api.git"
+  },
+  "activationEvents": [
+    "onLanguage:lua",
+    "onLanguage:pluto",
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "lua-stand-api",
+      "properties": {
+        "luaStandApi.enableStandSnippets": {
+          "type": "boolean",
+          "default": true,
+          "description": "Включить автодополнение и подсказки для Stand API (stand-snippets.code-snippets)."
+        },
+        "luaStandApi.enableNativeSnippetsAsTableStyle": {
+          "type": "boolean",
+          "default": true,
+          "description": "Включить автодополнение нативов игры в табличном стиле: PED.CREATE_PED(...) (native-snippets.code-snippets)."
+        },
+        "luaStandApi.enableNativeSnippetsAsGlobalVar": {
+          "type": "boolean",
+          "default": false,
+          "description": "Включить автодополнение нативов игры как глобальных функций: CREATE_PED(...) без неймспейса (native-snippets.code-snippets)."
+        },
+        "luaStandApi.enableHelperSnippets": {
+          "type": "boolean",
+          "default": true,
+          "description": "Включить помощные сниппеты (helper-snippets.code-snippets)."
+        },
+        "standApi.natives.paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "Дополнительные папки для поиска нативов из `util.require_natives(...)`. В каждой ищутся `natives-<версия>/`, `natives/<версия>/` и `<версия>/` (можно указать и саму папку версии). Поддерживаются `%APPDATA%`, `${env:NAME}` и `~`. Порядок поиска: воркспейс → эти папки → `%APPDATA%\\Stand\\Lua Scripts\\lib`."
+        },
+        "standApi.natives.hideStaticSnippets": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Скрывать встроенные сниппеты нативов (`native-snippets.code-snippets`), если в проекте найден `util.require_natives(...)` — подсказки тогда берутся из реального файла нативов."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.140.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}
